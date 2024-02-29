@@ -2,6 +2,11 @@ import './App.css';
 import { useState , useEffect} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Login from './login';
+import Logout from './logout';
+import {gapi} from 'gapi-script';
+
+const clientId="745807323850-qa6kn3lkddddotuc2bbmaf7ivm7qmgmo.apps.googleusercontent.com";
 
 
 const baseUrl='http://localhost/react_todo/'
@@ -10,6 +15,16 @@ function App() {
 
   const [todo, setTodo] = useState('')
   const [todos, setTodos] = useState([])
+
+  useEffect(()=>{
+    function start(){
+      gapi.client.init({
+        clientId:clientId,
+        scope:""
+      })
+    };
+    gapi.load('client:auth2',start);
+  });
 
 
   useEffect(() =>{
@@ -94,7 +109,9 @@ function App() {
   return (
     <div className='d-flex vh-100 vw-100 justify-content-center align-items-center'>
       <div className='shadow rounded p-3 w-50'>
-        <form onSubmit={handleSubmit}>
+        <Login/>
+        <Logout/>
+         <form onSubmit={handleSubmit}>
           <div className='d-flex gap-2'>
             <input value={todo} onChange={(e) => { setTodo(e.target.value); }} className='form-control' />
             <button type='submit' className='btn btn-primary'>Add</button>
@@ -116,6 +133,7 @@ function App() {
         </div>
       </div>
       <ToastContainer />
+      
     </div>
   );
 }
