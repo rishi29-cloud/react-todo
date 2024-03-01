@@ -9,7 +9,7 @@ import {gapi} from 'gapi-script';
 const clientId="745807323850-qa6kn3lkddddotuc2bbmaf7ivm7qmgmo.apps.googleusercontent.com";
 
 
-const baseUrl='http://localhost/react_todo/'
+const baseUrl='https://harmonious-sable-ab38b2.netlify.app/'
 
 function App() {
 
